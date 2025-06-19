@@ -4,12 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+    <div class="container">
+        <h1>Pick Your Poison!</h1>
+        <div class="buttonGroup">
+            <button class="rock">rock</button>
+            <button class="paper">paper</button>
+            <button class="scissors">scissors</button>
+        </div>
+    </div>
+
     <script>
     
-    let humanScore = 0 
-    let computerScore = 0
+    let humanScore = 0;
+    let computerScore = 0;
+    let round = 0;
+    const totalRounds = 5;
+
+    const container = document.querySelector(".container");
+    const resultDiv = document.createElement("div");
+    const scoreDiv = document.createElement("div");
+
+    container.appendChild(resultDiv);
+    container.appendChild(scoreDiv);
+
+    resultDiv.classList.add("result-message");
+    scoreDiv.classList.add("score-message");
+
+    /* pulls randam number 1-3 and assigns it to rock paper or scissors */
 
     function getComputerChoice() {
 
@@ -24,15 +49,7 @@
         }
     }
 
-    function getHumanChoice() {
-        const input = prompt ("rock, paper, or scissors?");
-        if (!input) return null;
-        return input ? input.trim().toLowerCase() : null;
-    }
-
-    function playGame() {
-
-        function playRound(humanChoice, computerChoice) {
+    function playRound(humanChoice, computerChoice) {
             if (humanChoice === computerChoice) {
                 return "tie";
             } 
@@ -47,34 +64,67 @@
                 computerScore++;
                 return "You Lose!";
             }
-        }
+    }
 
-        for (let round = 1; round <= 5; round++) {
-            const humanSelection = getHumanChoice();
-            const computerSelection = getComputerChoice();
-
-            const result = playRound(humanSelection,computerSelection);
-
-            console.log(
-                `Round ${round}: You chose ${humanSelection}, computer chose ${computerSelection}. ${result}`
-            );
-        }
+    function handleClick(event) {
+        if(round >= totalRounds) return;
 
 
+        const humanChoice = event.target.className;
+        const computerChoice = getComputerChoice();
+        const results = playRound(humanChoice, computerChoice);
+        round++;
 
-        if (humanScore > computerScore) {
-            console.log(`You win the game! ${humanScore} to ${computerScore}.`);
-        } else if (computerScore > humanScore) {
-            console.log(`You Lose the game! ${computerScore} to ${humanScore}.`);
-        } else {
-            console.log(`The game was a tie at ${humanScore} each.`)
+        resultDiv.textContent = (`Round ${round}: You chose ${humanChoice}, computer chose ${computerChoice}. ${results}`);
+        scoreDiv.textContent = (`Score: You-${humanScore}, computer-${computerScore}.`);
+        
+
+        if (round === totalRounds) {
+            let finalMessage = "";
+
+            if (humanScore > computerScore) {
+                finalMessage = `🏆 You win the game!(${humanScore} to ${computerScore})`;
+            } else if (computerScore > humanScore) {
+                finalMessage = `💥 You lose the game!(${computerScore} to ${humanScore})`;
+            } else {
+                finalMessage = `🤝 The game is a tie ${humanScore} each.`;
+            }
+
+            resultDiv.textContent += `\n${finalMessage}`;
+            showPlayAgainButton();
+
         }
     }
-    
-    playGame();
+
+    function showPlayAgainButton() {
+        const playAgainButton = document.createElement("button");
+        playAgainButton.textContent = "Play Again";
+        playAgainButton.classList.add("play-again");
+
+        playAgainButton.addEventListener("click", () => {
+
+            humanScore = 0;
+            computerScore = 0;
+            round = 0;
+            resultDiv.textContent = "";
+            scoreDiv.textContent = "";
+            playAgainButton.remove();
+        });
+
+        container.appendChild(playAgainButton);
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        const buttons = document.querySelectorAll(".rock, .paper, .scissors");
+        buttons.forEach(button => { 
+            button.addEventListener("click", handleClick);
+        })
+    });
 
 
     </script>
+    
+    
 </body>
 </html>
 

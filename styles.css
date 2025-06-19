@@ -1,0 +1,100 @@
+/* CSS */
+body{
+    background-color: lightyellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.rock, .paper, .scissors {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 0px 5px 0px 0px;
+}
+
+.rock:active, 
+.paper:active,
+.scissors:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .rock, .paper, .scissors {
+    padding: 0.25em 0.75em;
+  }
+}
+
+.container {
+    background-color: lightcoral;
+    padding: 10px;
+    margin: 0;
+    position: relative;
+    border: 3px solid;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    max-width: 400px;
+}
+
+h1 {
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+.buttonGroup {
+    padding-bottom: 10px;
+}
+
+.result-message {
+    font-family: "Open Sans", sans-serif;
+}
+
+.score-message {
+    font-family: "Open Sans", sans-serif;
+    color: white;
+}
+
+/* play again */
+
+.play-again {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 10px 10px;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  background-color: yellow;
+  margin: 10px 0px 10px 0px;
+}
+
+.play-again:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .play-again {
+    padding: 10px 10px;
+  }
+}
